@@ -127,7 +127,7 @@ hr.small {
     background: none;
 }
 
-#menu-toggle {
+#menu-toggle, #home-button {
     z-index: 1;
     position: fixed;
     top: 0;
@@ -242,4 +242,95 @@ hr.small {
 
 footer {
     padding: 100px 0;
+}
+
+/* Backgrounds */
+.create, .share, .contribute, .search, .confirm, .view {
+    padding: 50px 0;
+    background-color: #22313f;
+}
+
+/* Create Page */
+.create-form .btn {
+    display: block;
+    width: 10%;
+    margin: 15px auto;
+}
+.create-form span {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+.create-form input {
+    margin: 15px;
+    color: #333;
+    width: 150px;
+}
+
+/* Share page */
+.invite {
+    margin: 50px 0;
+}
+.share .playlist-id {
+    font-size: 5em;
+}
+
+/* Contribute page */
+ul.public-playlists {
+    padding: 0;
+    list-style-type: none;
+}
+ul.public-playlists a:hover {
+    text-decoration: none;
+}
+
+/* Confirm */
+.confirm .selected-song {
+    width: 600px;
+    height: 350px;
+    margin: 0 auto;
+    position: relative;
+}
+.confirm .selected-song .song-info {
+    position: absolute;
+    left: 315px;
+}
+.confirm .selected-song .song-info p {
+    margin: 0;
+    white-space: nowrap;
+    text-align: left;
+}
+p.title {
+    font-size: 3em;
+    font-style: bold;
+}
+p.artist, p.album {
+    font-size: 1.5em;
+}
+img.cover {
+    position: absolute;
+    left: 0;
+}
+
+/* View */
+.view table {
+    margin: 10px auto;
+}
+.view table td {
+    padding: 5px;
+}
+.view table th {
+    text-align: center;
+}
+th.status {
+    width: 50px;
+}
+table.contributors th.contributor-username {
+    width: 100px;
+}
+table.playlist th.song-name {
+    width: 300px;
+}
+table.playlist tr.top {
+    height: 200px;
 }
