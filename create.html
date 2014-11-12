@@ -36,30 +36,28 @@
     <a id="home-button" href="index.html" class="btn btn-dark btn-lg toggle"><i class="fa fa-home"></i></a>
 
     <!-- Create Playlist Form -->
-    <section id="contribute" class="contribute bg-primary">
+    <section id="create" class="create bg-primary">
       <div class="container">
         <div class="row">
           <div class="text-center">
-            <h1>Contribute to a Playlist</h1>
+            <h1>Create a New Playlist</h1>
             <hr class="small" />
-            <form class="create-form" action="search.html">
-              <span class="left">Username</span><input class="right" type="text" name="username" placeholder="Username" autofocus /><br />
-              <span class="left">Playlist ID</span><input class="right" type="text" name="playlistid" placeholder="Playlist ID" /><br />
-              <p>or</p>
-              <h3>Select Public Playlist</h3>
-              <ul class="public-playlists">
-                <li><a href="#">HelloWorld Playlist</a></li>
-                <li><a href="#">Road Trip!!1!&lt;33</a></li>
-                <li><a href="#">Random</a></li>
-                <li><a href="#">Someone send me some music</a></li>
-                <li><a href="#">BARNEY'S GET PSYCHED MIX</a></li>
-              </ul>
-              <input class="btn btn-lg btn-light" type="submit" value="Next" />
+            <!-- https://72bc04a9.ngrok.com/playlist -->
+            <form class="create-form">
+              <span class="left">Playlist Name</span><input class="right" type="text" name="name" placeholder="Name your playlist" /><br />
+              <input class="btn btn-lg btn-light" type="button" value="Add Filters" />
+              <input class="btn btn-lg btn-light" type="submit" value="Done" />
             </form>
           </div>
         </div>
       </div>
     </section>
+
+    <div>
+      <p>playlist response:<br />
+        <div class="response"></div>
+      </p>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -94,10 +92,12 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    
+    <script src="js/playlist.js"></script>
 
 </body>
 
