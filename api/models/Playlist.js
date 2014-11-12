@@ -14,6 +14,9 @@ module.exports = {
         phoneNumber : {
             type: 'string',
             required: true
+        },
+        songs : {
+            type: 'array'
         }
     }
 };

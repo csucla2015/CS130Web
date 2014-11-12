@@ -37,5 +37,10 @@ module.exports = {
                 callback(null,numbers);
             });
         });
+    },
+    textReceived : function(message) {
+        var response = twilio.TwimlResponse();
+        response.message(message);
+        return response.toString();
     }
 }

@@ -27,7 +27,7 @@ module.exports = {
             });
         }
     },
-    create : function(req,res) {
+    create : function(req, res) {
         var playlistName = req.param('name');
         Twilio.getFreeNumbers(function(err, numbers) {
             if (numbers.length <=0) {
@@ -48,6 +48,29 @@ module.exports = {
                 });
             }
         });
+    },
+    addSong : function(req, res) {
+        var twilioNum = req.param('To'),
+            clientNum = req.param('From'),
+            body = req.param('Body');
+        Playlist.findOne({
+            phoneNumber : twilioNum
+        }, function(err, playlist) {
+            if (err) {
+                return res.serverError(err);
+            }
+            if (playlist.songs) {
+                playlist.songs.push(body);
+            } else {
+                playlist.songs = [body];
+            }
+            playlist.save(function(err) {
+                if (err) {
+                    return res.serverError(err);
+                }
+                twiML = Twilio.textReceived(body + ' was added to the playlist: ' + playlist.playlistName);
+                res.send(twiML);
+            });
+        });
     }
 };
-
