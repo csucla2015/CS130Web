@@ -32,13 +32,27 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
+  /*'/': {
     view: 'homepage'
-  },
+  },*/
 
   'POST /playlist' : {
-      controller: 'PlaylistController',
-      action: 'create'
+    controller: 'PlaylistController',
+    action: 'create'
+  },
+
+  'GET /auth' : {
+    controller: 'RdioController',
+    action: 'auth'
+  },
+
+  'GET /get_access_token' : {
+    controller: 'RdioController',
+    action: 'get_access_token'
+  },
+
+  'GET /foo' : {
+    view: 'rdio'
   }
 
 
