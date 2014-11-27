@@ -14,7 +14,7 @@ var RDIO_ID = process.env.RDIO_ID,
 var api = 'http://api.rdio.com';
 
 module.exports = {
-	auth : function(req, res) {
+  auth : function(req, res) {
     request.post({
       url: api + '/oauth/request_token',
       oauth: {
@@ -22,11 +22,11 @@ module.exports = {
         consumer_key: RDIO_ID,
         consumer_secret: RDIO_SECRET
       }
-    }, function(err, res, body) {
+    }, function(e, r, body) {
       var response = qs.parse(body),
       login_url = response.login_url;
       url = login_url.substring(0, login_url.length-1);
-      request.get(url + '?oauth_token=' + response.oauth_token);
+      res.redirect(url + '?oauth_token=' + response.oauth_token);
     });
   },
 
