@@ -4,44 +4,69 @@
  * @description :: Server-side logic for managing rdios
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
+var config = {
+};
 
-var request = require('request');
-var qs = require('querystring');
+var rdio = require('rdio')(config);
 
-var RDIO_ID = process.env.RDIO_ID,
-    RDIO_SECRET = process.env.RDIO_SECRET;
-
-var api = 'http://api.rdio.com';
+var oauth_request_token;
+var oauth_request_token_secret;
+var oauth_access_token;
+var oauth_access_token_secret;
 
 module.exports = {
-  auth : function(req, res) {
-    request.post({
-      url: api + '/oauth/request_token',
-      oauth: {
-        callback: 'http://localhost:1337/get_access_token',
-        consumer_key: RDIO_ID,
-        consumer_secret: RDIO_SECRET
-      }
-    }, function(e, r, body) {
-      var response = qs.parse(body),
-      login_url = response.login_url;
-      url = login_url.substring(0, login_url.length-1);
-      res.redirect(url + '?oauth_token=' + response.oauth_token);
+  get_request_token: function(req, res) {
+    rdio.getRequestToken(function(err, oauth_token, oauth_token_secret, results) {
+      oauth_request_token = oauth_token; 
+      oauth_request_token_secret = oauth_token_secret;
+      //url = results.login_url.substring(0, results.login_url.length-1);
+      console.log(results.login_url);
+      res.redirect(results.login_url + '?oauth_token=' + oauth_token);
     });
   },
 
-  get_access_token : function(req, res) {
-    request.post({
-      url: api + '/oauth/access_token',
-      oauth: {
-        consumer_key: RDIO_ID,
-        consumer_secret: RDIO_SECRET,
-        token: req.query.oauth_token,
-        verifier: req.query.oauth_verifier
-      }
-    }, function(e, r, body) {
-      console.log(body);
+  get_access_token: function(req, res) {
+    console.log('hi');
+    console.log(req.query);
+    rdio.getAccessToken(oauth_request_token, oauth_request_token_secret, req.query.oauth_verifier,
+      function(error, oauth_token, oauth_token_secret, results) {
+        oauth_access_token = oauth_token;
+        oauth_access_token_secret = oauth_token_secret;
     });
+  },
+
+  search: function(req, res) {
+    console.log('search was called');
+    console.log(req.query);
+    if (req.param('title') != null && req.param('phoneNumber') != null) {
+      rdio.api(oauth_access_token, oauth_access_token_secret, {
+        method: 'search',
+        query: req.param('title'),
+        types: ['Track'],
+        count: '1'
+      }, function(err, data, response) {
+        console.log(data);
+        data = JSON.parse(data);
+        Playlist.findOne({phoneNumber: req.param('phoneNumber')}, function(err, playlist) {
+          if (playlist.songs == null)
+            playlist.songs = [data.result.results[0]];
+          else
+            playlist.songs.push(data.result.results[0]);
+          playlist.save(function(err) {
+            //res.redirect('/playlist?phonenumber=' + playlist.phoneNumber +
+            //  '&songkey=' + data.result.results[0].key);
+            console.log(playlist);
+            res.status(200).json({'song': data.result.results[0]});
+          });
+        });
+      });
+    } else {
+      res.view('search');
+    }
+  },
+
+  create: function(req, res){
+    res.view('create');
   }
 };
 

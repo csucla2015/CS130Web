@@ -1,6 +1,6 @@
-$(".create-form").on("submit", function(e) {
+$(".create-form").on("submit", function() {
   $.post(
-    "https://72bc04a9.ngrok.com/playlist",
+    "https://2aaf6ee1.ngrok.com/playlist",
     $(".create-form").serialize(),
     function(res) {
       $(".response").html(res);

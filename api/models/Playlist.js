@@ -7,7 +7,11 @@
 
 module.exports = {
     attributes: {
-        playlistName : {
+        name : {
+            type: 'string',
+            required: true
+        },
+        description : {
             type: 'string',
             required: true
         },
@@ -16,6 +20,9 @@ module.exports = {
             required: true
         },
         songs : {
+            type: 'array'
+        },
+        filters : {
             type: 'array'
         }
     }

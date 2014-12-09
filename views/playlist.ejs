@@ -1,0 +1,98 @@
+<!-- Navigation -->
+<a id="home-button" href="index.html" class="btn btn-dark btn-lg toggle"><i class="fa fa-home"></i></a>
+
+<section id="create" class="create bg-primary">
+  <div class="container">
+    
+    <div class="text-center">
+      <h1><%= playlist.name %></h1>
+      <h2><%= playlist.description %></h2>
+      <hr class="small" />
+    </div>
+<%= playlist.phoneNumber %>
+    <div id="apiswf"></div>
+        <div class="row">
+          <div class="col-md-2">Search</div>
+            <span class="left">Song Title</span><input id="title" class="right" type="text" placeholder="Shake It Off" autofocus /><br />
+            <input id="phoneNumber" type="text" hidden="hidden" value="<%= playlist.phoneNumber %>" />
+            <button id="search" class="btn btn-lg btn-light">Search</button>
+        </div>
+        <div class="row">
+          <div class="col-md-6"> 
+            <div class="playControls btn-group">
+              <button id="play" class="btn btn-default"><i class="fa fa-play-circle"></i> Play</button>
+              <button id="stop" class="btn btn-default"><i class="fa fa-stop"></i> Stop</button>
+              <button id="pause" class="btn btn-default"><i class="fa fa-pause"></i> Pause</button>
+              <button id="previous" class="btn btn-default"><i class="fa fa-step-backward"></i> Previous</button>
+              <button id="next" class="btn btn-default"><i class="fa fa-step-forward"></i> Next</button>
+            </div>
+          </div>
+
+        <div><%= JSON.stringify(playlist.songs) %></div>
+
+        <h3>Song Queue</h3>
+        <table class="playlist" border="1">
+          <tr>
+            <th class="song-name">Song Name</th>
+            <th class="status">Status</th>
+          </tr>
+          <tr class=top>
+            <td>
+              <img src="/images/HardDayUK.jpg" width="150" height="150"/>
+              Can't Buy Me Love
+            </td>
+            <td>Playing</td>
+          </tr>
+          <tr>
+            <td>Shake It Off</td>
+            <td>OK</td>
+          </tr>
+        </table>
+        </div>
+      </div>
+      <div class="row well">
+        <div class="artistAlbumInfo well col-md-6 ">
+          <h3><span id="artist"></span> - <span id="track"></span></h3>
+          <img src="" id="art" class="albumArt">
+        </div>
+        <div class="col-md-6">
+          <h3 id="album"></h3>
+          <h4>Playstate <p id="playState"></p></h4>
+          <h4>Position <p id="position"></p></h4>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h4><strong>Start Bootstrap</strong>
+                </h4>
+                <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
+                    <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
+                    </li>
+                </ul>
+                <br>
+                <ul class="list-inline">
+                    <li>
+                        <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                    </li>
+                </ul>
+                <hr class="small">
+                <p class="text-muted">Copyright &copy; Your Website 2014</p>
+            </div>
+        </div>
+    </div>
+</footer>
+

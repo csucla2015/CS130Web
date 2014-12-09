@@ -8,6 +8,7 @@
 module.exports = {
     index : function(req, res) {
         var phoneNumber = req.param('phonenumber');
+        var songkey = req.param('songkey');
         if (phoneNumber) {
             // if phoneNumber exists then return one playlist
             Playlist.findOne({
@@ -16,7 +17,9 @@ module.exports = {
                 if (err) {
                     return res.serverError(err);
                 }
-                return res.json(playlist);
+                console.log(JSON.stringify(playlist));
+                res.view('playlist', {playlist:playlist, songkey:songkey});
+                //return res.json(playlist);
             });
         } else {
             Playlist.find({}, function(err, playlists) {
@@ -28,7 +31,9 @@ module.exports = {
         }
     },
     create : function(req, res) {
-        var playlistName = req.param('name');
+        var name = req.param('name');
+        var description = req.param('description');
+        //var filters = [req.param('filter1'), req.param('filter2')];
         Twilio.getFreeNumbers(function(err, numbers) {
             if (numbers.length <=0) {
                 return res.send(402,{
@@ -38,13 +43,15 @@ module.exports = {
             if (numbers) {
                 var number = numbers[0];
                 Playlist.create({
-                    playlistName : playlistName,
-                    phoneNumber : number
+                    name : name,
+                    description : description,
+                    phoneNumber : number,
+                    //filters : filters
                 }, function(err, playlist) {
                     if (err) {
                         return res.serverError(err);
                     }
-                    return res.json(playlist);
+                    res.redirect('/playlist?phonenumber=' + playlist.phoneNumber);
                 });
             }
         });
@@ -71,6 +78,16 @@ module.exports = {
                 twiML = Twilio.textReceived(body + ' was added to the playlist: ' + playlist.playlistName);
                 res.send(twiML);
             });
+        });
+    },
+    playlist: function(req, res) {
+        Playlist.findOne({
+            'gt': {id:0}
+        }, function(err, playlist) {
+            if (err) {
+                return res.serverError(err);
+            }
+            res.view('playlist', {playlist:playlist});
         });
     }
 };

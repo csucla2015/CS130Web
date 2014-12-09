@@ -1,0 +1,83 @@
+<!-- Navigation -->
+<a id="home-button" href="index.html" class="btn btn-dark btn-lg toggle"><i class="fa fa-home"></i></a>
+
+<!-- Create Playlist Form -->
+<section id="view" class="view bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="text-center">
+        <h1><%= playlist.name %></h1>
+        <h2><%= playlist.description %></h2>
+        <hr class="small" />
+        <h3>Contributors</h3>
+        <table class="contributors" border="1">
+          <tr>
+            <th class="status">Status</th>
+            <th class="contributor-username">Username</th>
+          </tr>
+          <tr>
+            <td>OK</td>
+            <td>ayoon212</td>
+          </tr>
+          <tr>
+            <td>OK</td>
+            <td>B3luga_Whal3</td>
+          </tr>
+        </table>
+
+        <h3>Song Queue</h3>
+        <table class="playlist" border="1">
+          <tr>
+            <th class="song-name">Song Name</th>
+            <th class="status">Status</th>
+          </tr>
+          <tr class=top>
+            <td>
+              <img src="img/HardDayUK.jpg" width="150" height="150"/>
+              Can't Buy Me Love
+            </td>
+            <td>Playing</td>
+          </tr>
+          <tr>
+            <td>Shake It Off</td>
+            <td>OK</td>
+          </tr>
+        </table>
+      
+        <a class="btn btn-lg btn-light" href="search.html">Add Song</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h4><strong>Start Bootstrap</strong>
+                </h4>
+                <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
+                    <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
+                    </li>
+                </ul>
+                <br>
+                <ul class="list-inline">
+                    <li>
+                        <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                    </li>
+                </ul>
+                <hr class="small">
+                <p class="text-muted">Copyright &copy; Your Website 2014</p>
+            </div>
+        </div>
+    </div>
+</footer>
