@@ -52,7 +52,6 @@ module.exports = {
         count: '1'
       }, function(err, data) {
         var song, response;
-        console.log(data);
         data = JSON.parse(data);
         Playlist.findOne({phoneNumber: req.param('phoneNumber')}, function(err, playlist) {
           if (playlist.songs == null) {
@@ -75,7 +74,6 @@ module.exports = {
                   'newplaylist': true,
                   'song': song
                 };
-                console.log(response);
                 res.setHeader('Content-Type', 'application/json');
                 res.status(200).json(response);
               });
@@ -90,8 +88,6 @@ module.exports = {
               playlist: playlist.info.key,
               tracks: [song.key]
             }, function(err, data) {
-              console.log(err);
-              console.log(data);
               console.log('song added to playlist');
               playlist.info = JSON.parse(data).result;
               playlist.save(function(err) {

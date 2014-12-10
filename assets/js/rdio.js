@@ -42,6 +42,7 @@ $(document).ready(function() {
 
   // set up the controls
   $('#play').click(function() { 
+    // Reload the playlist if first play
     if (initial_play) {
       console.log(initial_play);
       apiswf.rdio_play($('#playlistKey').val());
@@ -53,9 +54,10 @@ $(document).ready(function() {
   });
   $('#stop').click(function() { apiswf.rdio_stop(); });
   $('#pause').click(function() { apiswf.rdio_pause(); });
-  $('#previous').click(function() { console.log('previous'); apiswf.rdio_previous(); });
-  $('#next').click(function() { console.log('next'); apiswf.rdio_next(); });
+  $('#previous').click(function() { apiswf.rdio_previous(); });
+  $('#next').click(function() { apiswf.rdio_next(); });
   $('#search').click(function() {
+    // Make Ajax call to RdioController
     $.ajax({
       url: '/rdio/search',
       data: {
@@ -108,6 +110,7 @@ callback_object.ready = function ready(user) {
     $('#nobody').show();
   }
 
+  stackBlurImage('albumart', 'canvas', 40, false);
   console.log(user);
 }
 
@@ -118,6 +121,18 @@ callback_object.freeRemainingChanged = function freeRemainingChanged(remaining) 
 callback_object.playStateChanged = function playStateChanged(playState) {
   // The playback state has changed.
   // The state can be: 0 - paused, 1 - playing, 2 - stopped, 3 - buffering or 4 - paused.
+  if (playState == '1') {
+    $('#pause').show();
+    $('#play').hide();
+  } else {
+    $('#pause').hide();
+    $('#play').show();
+  }
+  if (playState == '3') {
+    $('#buffering').show();
+  } else {
+    $('#buffering').hide();
+  }
   $('#playState').text(playState);
 }
 
@@ -130,6 +145,7 @@ callback_object.playingTrackChanged = function playingTrackChanged(playingTrack,
     $('#artist').text(playingTrack['artist']);
     $('#art').attr('src', playingTrack['icon']);
   }
+  //stackBlurImage('art', 'canvas', 50, false);
 }
 
 callback_object.playingSourceChanged = function playingSourceChanged(playingSource) {

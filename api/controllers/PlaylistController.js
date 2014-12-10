@@ -19,7 +19,6 @@ module.exports = {
                 }
                 console.log(JSON.stringify(playlist));
                 res.view('playlist', {playlist:playlist});
-                //return res.json(playlist);
             });
         } else {
             Playlist.find({}, function(err, playlists) {
@@ -33,7 +32,6 @@ module.exports = {
     create : function(req, res) {
         var name = req.param('name');
         var description = req.param('description');
-        //var filters = [req.param('filter1'), req.param('filter2')];
         Twilio.getFreeNumbers(function(err, numbers) {
             if (numbers.length <=0) {
                 return res.send(402,{
@@ -47,7 +45,6 @@ module.exports = {
                     description : description,
                     phoneNumber : number,
                     info: {key:''} // initially empty
-                    //filters : filters
                 }, function(err, playlist) {
                     if (err) {
                         return res.serverError(err);

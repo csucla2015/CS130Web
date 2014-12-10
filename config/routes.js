@@ -43,15 +43,7 @@ module.exports.routes = {
   'POST /playlist' : {
     controller: 'PlaylistController',
     action: 'create'
-  },
-
-  /*'GET /search': {
-    view: 'search'
   }
-  'GET /get_access_token': {
-    controller: 'RdioController',
-    action: 'get_access_token'
-  }*/
 
 
   /***************************************************************************

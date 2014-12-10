@@ -1,76 +1,59 @@
 <!-- Navigation -->
 <a id="home-button" href="/" class="btn btn-dark btn-lg toggle"><i class="fa fa-home"></i></a>
-<input id="phoneNumber" type="text" hidden="hidden" value="<%= playlist.phoneNumber %>" />
-<input id="playlistKey" type="text" hidden="hidden" value="<%= playlist.info.key %>"/>
+
+<input id="phoneNumber" class="hidden" type="text" hidden="hidden" value="<%= playlist.phoneNumber %>" />
+<input id="playlistKey" class="hidden" type="text" hidden="hidden" value="<%= playlist.info.key %>"/>
 
 <section id="create" class="create bg-primary">
   <div class="container">
     
     <div class="text-center">
       <h1 id="playlistName"><%= playlist.name %></h1>
-      <h2 id="playlistDesc"><%= playlist.description %></h2>
+      <h3 id="playlistDesc"><%= playlist.description %></h2>
       <hr class="small" />
-      <h1 id="playlistNumber">Text a song to: <%= playlist.phoneNumber %></h1>
+      <h1 id="playlistNumber">Text a song to:
+        (<%= playlist.phoneNumber.substr(2,3) %>) 
+        <%= playlist.phoneNumber.substr(4,3) %>-<%= playlist.phoneNumber.substr(7,4) %>
+      </h1>
     </div>
     <div id="apiswf"></div>
-        <div class="row">
-          <span class="left">Song Title</span><input id="title" class="right" type="text" placeholder="Shake It Off" autofocus /><br />
-          <button id="search" class="btn btn-lg btn-light">Search</button>
-        </div>
-        <div class="row">
-          <div class="col-md-6"> 
-            <div class="playControls btn-group">
-              <button id="play" class="btn btn-default"><i class="fa fa-play-circle"></i> Play</button>
-              <button id="stop" class="btn btn-default"><i class="fa fa-stop"></i> Stop</button>
-              <button id="pause" class="btn btn-default"><i class="fa fa-pause"></i> Pause</button>
-              <button id="previous" class="btn btn-default"><i class="fa fa-step-backward"></i> Previous</button>
-              <button id="next" class="btn btn-default"><i class="fa fa-step-forward"></i> Next</button>
-            </div>
-          </div>
-      </div>
-      <div class="row well">
-        <div class="artistAlbumInfo well col-md-6 ">
-          <h3><span id="artist"></span> - <span id="track"></span></h3>
-          <img src="" id="art" class="albumArt">
-        </div>
-        <div class="col-md-6">
-          <h3 id="album"></h3>
-          <h4>Playstate <p id="playState"></p></h4>
-          <h4>Position <p id="position"></p></h4>
-        </div>
-      </div>
   </div>
 </section>
 
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h4><strong>Start Bootstrap</strong>
-                </h4>
-                <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
-                <ul class="list-unstyled">
-                    <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                    <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
-                    </li>
-                </ul>
-                <br>
-                <ul class="list-inline">
-                    <li>
-                        <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
-                    </li>
-                </ul>
-                <hr class="small">
-                <p class="text-muted">Copyright &copy; Your Website 2014</p>
-            </div>
-        </div>
-    </div>
-</footer>
+<section id="playlist" class="playlist">
+  <img id="albumart" src="images/angles.jpg" />
+  <canvas id="canvas"></canvas>
 
+  <div id="playlist-container" class="container">
+    <div class="row">
+      <div class="text-center">
+        <div class="selected-song">
+          <img class="cover" id="art" src="images/angles.jpg" />
+          <div class="song-info">
+            <p id="track" class="title">Under Cover Of Darkness</p>
+            <p id="artist" class="artist">The Strokes</p>
+            <p id="album" class="album">Angles</p>
+          </div>
+        </div>
+
+        <div class="placeholder">
+          <p id="buffering">Buffering, just a sec...</p>
+        </div>
+        <div class="playControls btn-group">
+          <button id="pause" class="btn btn-default"><i class="fa fa-pause"></i> Pause</button>
+          <button id="play" class="btn btn-default"><i class="fa fa-play-circle"></i> Play</button>
+          <button id="stop" class="btn btn-default"><i class="fa fa-stop"></i> Stop</button>
+          <button id="previous" class="btn btn-default"><i class="fa fa-step-backward"></i> Previous</button>
+          <button id="next" class="btn btn-default"><i class="fa fa-step-forward"></i> Next</button>
+        </div>
+
+        <hr class="small" />
+        <h3>Add a Song</h3>
+        <div class="row">
+          <span class="left">Search for a Song Title</span><input id="title" class="right" type="text" placeholder="Shake It Off Taylor Swift" autofocus />
+          <button id="search" class="btn btn-lg btn-light">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
