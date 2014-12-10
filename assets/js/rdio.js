@@ -38,22 +38,41 @@ $(document).ready(function() {
       'apiswf', // the ID of the element that will be replaced with the SWF
       1, 1, '9.0.0', 'expressInstall.swf', flashvars, params, attributes);
 
+  var initial_play = true;
+
   // set up the controls
-  $('#play').click(function() { console.log('play'); apiswf.rdio_play(); });
+  $('#play').click(function() { 
+    if (initial_play) {
+      console.log(initial_play);
+      apiswf.rdio_play($('#playlistKey').val());
+      initial_play = false;
+    } else {
+      console.log(initial_play);
+      apiswf.rdio_play();
+    }
+  });
   $('#stop').click(function() { apiswf.rdio_stop(); });
   $('#pause').click(function() { apiswf.rdio_pause(); });
-  $('#previous').click(function() { apiswf.rdio_previous(); });
-  $('#next').click(function() { apiswf.rdio_next(); });
+  $('#previous').click(function() { console.log('previous'); apiswf.rdio_previous(); });
+  $('#next').click(function() { console.log('next'); apiswf.rdio_next(); });
   $('#search').click(function() {
     $.ajax({
       url: '/rdio/search',
       data: {
         'title': $('#title').val(),
-        'phoneNumber': $('#phoneNumber').val()
+        'phoneNumber': $('#phoneNumber').val(),
+        'playlistName': $('#playlistName').text(),
+        'playlistDesc': $('#playlistDesc').text()
       }
     }).done(function(data) {
+      console.log(data);
       alert(data.song.name + " was added to the playlist!");
-      apiswf.rdio_queue(data.song.key);
+      if (data.newplaylist) {
+        $('#playlistKey').text(data.playlist.key);
+        apiswf.rdio_play(data.playlist.key);
+        initial_play = false;
+        console.log(initial_play);
+      }
     }).fail(function(data) {
       console.log('fail');
       console.log(data);

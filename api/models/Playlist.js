@@ -24,6 +24,9 @@ module.exports = {
         },
         filters : {
             type: 'array'
+        },
+        info : {
+            type: 'object'
         }
     }
 };

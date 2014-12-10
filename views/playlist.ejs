@@ -1,21 +1,21 @@
 <!-- Navigation -->
-<a id="home-button" href="index.html" class="btn btn-dark btn-lg toggle"><i class="fa fa-home"></i></a>
+<a id="home-button" href="/" class="btn btn-dark btn-lg toggle"><i class="fa fa-home"></i></a>
+<input id="phoneNumber" type="text" hidden="hidden" value="<%= playlist.phoneNumber %>" />
+<input id="playlistKey" type="text" hidden="hidden" value="<%= playlist.info.key %>"/>
 
 <section id="create" class="create bg-primary">
   <div class="container">
     
     <div class="text-center">
-      <h1><%= playlist.name %></h1>
-      <h2><%= playlist.description %></h2>
+      <h1 id="playlistName"><%= playlist.name %></h1>
+      <h2 id="playlistDesc"><%= playlist.description %></h2>
       <hr class="small" />
+      <h1 id="playlistNumber">Text a song to: <%= playlist.phoneNumber %></h1>
     </div>
-<%= playlist.phoneNumber %>
     <div id="apiswf"></div>
         <div class="row">
-          <div class="col-md-2">Search</div>
-            <span class="left">Song Title</span><input id="title" class="right" type="text" placeholder="Shake It Off" autofocus /><br />
-            <input id="phoneNumber" type="text" hidden="hidden" value="<%= playlist.phoneNumber %>" />
-            <button id="search" class="btn btn-lg btn-light">Search</button>
+          <span class="left">Song Title</span><input id="title" class="right" type="text" placeholder="Shake It Off" autofocus /><br />
+          <button id="search" class="btn btn-lg btn-light">Search</button>
         </div>
         <div class="row">
           <div class="col-md-6"> 
@@ -27,28 +27,6 @@
               <button id="next" class="btn btn-default"><i class="fa fa-step-forward"></i> Next</button>
             </div>
           </div>
-
-        <div><%= JSON.stringify(playlist.songs) %></div>
-
-        <h3>Song Queue</h3>
-        <table class="playlist" border="1">
-          <tr>
-            <th class="song-name">Song Name</th>
-            <th class="status">Status</th>
-          </tr>
-          <tr class=top>
-            <td>
-              <img src="/images/HardDayUK.jpg" width="150" height="150"/>
-              Can't Buy Me Love
-            </td>
-            <td>Playing</td>
-          </tr>
-          <tr>
-            <td>Shake It Off</td>
-            <td>OK</td>
-          </tr>
-        </table>
-        </div>
       </div>
       <div class="row well">
         <div class="artistAlbumInfo well col-md-6 ">

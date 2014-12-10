@@ -18,7 +18,7 @@ module.exports = {
                     return res.serverError(err);
                 }
                 console.log(JSON.stringify(playlist));
-                res.view('playlist', {playlist:playlist, songkey:songkey});
+                res.view('playlist', {playlist:playlist});
                 //return res.json(playlist);
             });
         } else {
@@ -46,6 +46,7 @@ module.exports = {
                     name : name,
                     description : description,
                     phoneNumber : number,
+                    info: {key:''} // initially empty
                     //filters : filters
                 }, function(err, playlist) {
                     if (err) {
